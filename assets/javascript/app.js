@@ -80,6 +80,7 @@ function showQandA() {
     // make sure the HTML elements are empty - nothing left from previous question+answers or messages
     $("#question-message").empty();
     $("#reveal-answer").empty();
+    $("#pic-gif").hide();
     $("#pic-gif").attr("src", "");
     $("#score").empty();
     $(".answers").empty();
@@ -114,7 +115,8 @@ function showNext() {
 function sayTimeIsUp() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#pic-gif").empty();
+    $("#pic-gif").attr("src", "");
+    $("#pic-gif").show();
     $(".answers").empty();
     $(".answers").hide();
     // fill up the HTML elements of interest
@@ -127,7 +129,8 @@ function sayTimeIsUp() {
 function sayCongrats() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#pic-gif").empty();
+    $("#pic-gif").attr("src", "");
+    $("#pic-gif").show();
     $(".answers").empty();
     $(".answers").hide();
     // fill up the HTML elements of interest
@@ -139,7 +142,8 @@ function sayCongrats() {
 function sayWrong() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#pic-gif").empty();
+    $("#pic-gif").attr("src", "");
+    $("#pic-gif").show();
     $(".answers").empty();
     $(".answers").hide();
     // fill up the HTML elements of interest
@@ -166,6 +170,7 @@ function showResult() {
      $("#question-message").empty();
      $("#reveal-answer").empty();
      $("#pic-gif").attr("src", "");
+     $("#pic-gif").hide();
      $(".answers").empty();
      $(".answers").hide();
      // display a message saying the game is over
