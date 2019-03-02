@@ -1,5 +1,8 @@
 body {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Handlee', cursive;
+    background-image: url("../images/background_dna.jpg");
+    background-repeat: repeat;
+    background-size: cover;
 };
 
 

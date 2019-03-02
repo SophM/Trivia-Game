@@ -12,12 +12,14 @@
 
 5. Passing on to the next question (no matter the reason) is automatic.
 
+6. If the player runs out of time and doesn't answer the question, we display a "time is up" message with a little pic/gif/something and then goes on automatically to display the next question.
+
 6. If the player answers, there are two possible outcomes:
         - the answer is correct.
         - the answer is incorrect.
 
-7. If the answer is correct, we display a "congrats" message with a little pic/gif/something.
+7. If the answer is correct, we display a "congrats" message with a little pic/gif/something and then goes on automatically to display the next question..
 
-8. If the answer is incorrect, we display a "you're wrong" message with a little pic/gif/something.
+8. If the answer is incorrect, we display a "you're wrong" message with a little pic/gif/something and then goes on automatically to display the next question..
 
 9. When all the questions have been asked, we get the "final" screen that displays a little message saying the game is over, the number of correct answers, the number of incorrect answers, the number of unanswered questions and a button to start over. 

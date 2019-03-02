@@ -5,17 +5,21 @@
 // array to store the questions and corresponding answers
 var triviaData = [
     {q:"What does DNA stand for?", a1:"deoxyribonucleic acid", a2:"double-helix nucleic acid", a3:"dominant nucleic acid", a4:"directed nucleic acid"},
+    {q:"Every genome is made of 4 different base pairs. What are they?", a1:"B - U - D - G", a2:"A - T - C - G", a3:"C - V - T - U", a4:"A - U - T - B"},
     {q:"How much of your DNA is identical to every other human?", a1:"99%", a2:"79%", a3:"59%", a4:"29%"},
-    {q:"How many cells are in the human body, on average?", a1:"37,000", a2:"370,000", a3:"3.7 millions", a4:"37 trillions"},
-    {q:"Can a person present two different sets of DNA?", a1:"Yes", a2:"No"},
+    {q:"How many base pairs are in the human genome?", a1:"30,000", a2:"300,000", a3:"3 millions", a4:"3 billions"},
+    {q:"Can a person present two different DNA profiles?", a1:"Yes", a2:"No"},
     {q:"When was the first human genome sequenced?", a1:"2000", a2:"2003", a3:"2006", a4:"2009"},
     {q:"How long would it take to type the human genome if you could type 60 wpm, 8 hours a day?", a1:"50 days", a2:"50 weeks", a3:"50 months", a4:"50 years"},
     {q:"We share 50% of our genes with...?", a1:"Chimpanzees", a2:"God", a3:"Bananas", a4:"Dinosaurs"},
-    {q:"How far could you go if you laid out all of your DNA end to end?", a1:"around the Earth, one time", a2:"from Earth to the sun, one time", a3:"around the Eatrh, hundreds of time", a4:"from Earth to the sun, hundreds of time"},
+    {q:"How far could you go if you laid out all of your DNA end to end?", a1:"around the Earth, one time", a2:"to the sun, one time", a3:"around the Eatrh, hundreds of time", a4:"to the sun, hundreds of time"},
 ];
-
+console.log(triviaData[4].a3);
 // array to store the correct answers - same order as the question!
-var correctAnswers = ["deoxyribonucleic acid", "99%", "37 trillions", "Yes", "2003", "50 years", "Bananas", "from Earth to the sun, hundreds of time"]
+var correctAnswers = ["deoxyribonucleic acid", "A - T - C - G", "99%", "3 billions", "Yes", "2003", "50 years", "Bananas", "to the sun, hundreds of time"]
+
+// array to store the gifs to display - same order as the question!
+var gifs = ["assets/images/dna.gif", "assets/images/atcg.png", "assets/images/identical.gif", "assets/images/3-billions.gif", "assets/images/dna-profile.gif", "assets/images/sequencing.gif", "assets/images/typing.gif", "assets/images/banana.gif", "assets/images/earth-sun.gif"]
 
 // variable to keep track of the number of question asked, the number of correct
 // and incorrect answers and the number of unanswered questions
@@ -25,10 +29,10 @@ var incorrect = 0;
 var unanswered = 0;
 
 //variable to store the time allowed to answer
-var timeAllowed = 30;
+var timeAllowed = 15;
 
 // variable to store the main flow of the game
-var timer;
+var mainFlow;
 
 // variable to store the setInterval function to 
 // display automatically the question+answers
@@ -47,7 +51,7 @@ function mainFlowGame() {
     // if the timer goes to 0 and all the questions haven't been displayed
     if (timeAllowed === 0 && count < triviaData.length) {
         // stop the main flow of the game and timer
-        clearInterval(timer);
+        clearInterval(mainFlow);
         // stop the display of question+answers
         clearInterval(loopQandA);
         // increase by 1 the unanswered count
@@ -55,12 +59,12 @@ function mainFlowGame() {
         console.log("unanswered: " + unanswered);
         // display "time is up" message
         sayTimeIsUp();
-        // restart the game after 3 seconds
-        setTimeout(restart, 3*1000);
+        // restart the game after 4 seconds
+        setTimeout(restart, 4*1000);
     // otherwise if all the question has been displayed
     } else if (timeAllowed === 0 && count === triviaData.length) {
         // stop the main flow of the game and timer
-        clearInterval(timer);
+        clearInterval(mainFlow);
         // stop the display of question+answers
         clearInterval(loopQandA);
         // increase by 1 the unanswered count - for the last question
@@ -78,10 +82,8 @@ function showQandA() {
     $("#reveal-answer").empty();
     $("#pic-gif").attr("src", "");
     $("#score").empty();
-    $("#answer1").empty();
-    $("#answer2").empty();
-    $("#answer3").empty();
-    $("#answer4").empty();
+    $(".answers").empty();
+    $(".answers").show();
     // fill up the HTML elements with the question + possible answers
     // store each answer as the value of the corresponding button
     $("#question-message").text(triviaData[count].q);
@@ -93,6 +95,11 @@ function showQandA() {
     $("#answer3").attr("value", triviaData[count].a3);
     $("#answer4").text(triviaData[count].a4);
     $("#answer4").attr("value", triviaData[count].a4);
+    // hide the empty asnwer button
+    if ((triviaData[count].a3 === undefined) || (triviaData[count].a4 === undefined)) {
+        $("#answer3").hide();
+        $("#answer4").hide();
+    };
     // increase the count of questions asked by 1
     count++;
     console.log("count: " + count);
@@ -107,56 +114,50 @@ function showNext() {
 function sayTimeIsUp() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#answer1").empty();
-    $("#answer2").empty();
-    $("#answer3").empty();
-    $("#answer4").empty();
     $("#pic-gif").empty();
+    $(".answers").empty();
+    $(".answers").hide();
     // fill up the HTML elements of interest
     $("#question-message").text("Time is up!");
     $("#reveal-answer").text("The correct answer is: " + correctAnswers[count-1]);
-    $("#pic-gif").attr("src", "assets/images/gif-wrong.gif");
+    $("#pic-gif").attr("src", gifs[count-1]);
 };
 
 // function to display "congrats" message + gif if correct answer
 function sayCongrats() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#answer1").empty();
-    $("#answer2").empty();
-    $("#answer3").empty();
-    $("#answer4").empty();
     $("#pic-gif").empty();
+    $(".answers").empty();
+    $(".answers").hide();
     // fill up the HTML elements of interest
     $("#question-message").text("Congrats, you got it!");
-    $("#pic-gif").attr("src", "assets/images/gif-congrats.gif");
+    $("#pic-gif").attr("src", gifs[count-1]);
 };
 
 // function to display "you're wrong" message + gif if incorrect answer
 function sayWrong() {
     // empty all the HTML elements
     $("#question-message").empty();
-    $("#answer1").empty();
-    $("#answer2").empty();
-    $("#answer3").empty();
-    $("#answer4").empty();
     $("#pic-gif").empty();
+    $(".answers").empty();
+    $(".answers").hide();
     // fill up the HTML elements of interest
     $("#question-message").text("Sorry, you're wrong!");
     $("#reveal-answer").text("The correct answer is: " + correctAnswers[count-1]);
-    $("#pic-gif").attr("src", "assets/images/gif-wrong.gif");
+    $("#pic-gif").attr("src", gifs[count-1]);
 };
 
 // function to restart the game after the player answered or time ran out
 function restart() {
     // relaunch the mainFlowGame() function - restart the timer
-    timeAllowed = 30;
+    timeAllowed = 15;
     $("#timer").text("Timer: " + timeAllowed);
-    timer = setInterval(mainFlowGame, 1000);
+    mainFlow = setInterval(mainFlowGame, 1000);
     // display the next question+answers
     showQandA();
     // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, 30*1000);
+    loopQandA = setInterval(showNext, timeAllowed*1000);
 };
 
 // function to display results at the end of the game
@@ -165,10 +166,8 @@ function showResult() {
      $("#question-message").empty();
      $("#reveal-answer").empty();
      $("#pic-gif").attr("src", "");
-     $("#answer1").empty();
-     $("#answer2").empty();
-     $("#answer3").empty();
-     $("#answer4").empty();
+     $(".answers").empty();
+     $(".answers").hide();
      // display a message saying the game is over
      $("#question-message").text("No more question! You're done!");
      // display the score
@@ -184,6 +183,9 @@ function showResult() {
 // Main process
 // ==================================
 
+// not to diplay the buttons before the player clicks on the "start" button
+$(".answers").hide();
+
 // to start the game
 $("#start").on("click", function() {
     // the sart button disappears
@@ -191,17 +193,17 @@ $("#start").on("click", function() {
     // display the timer
     $("#timer").text("Timer: " + timeAllowed);
    // launch the mainFlowGame() function - start the timer
-    timer = setInterval(mainFlowGame, 1000);
+    mainFlow = setInterval(mainFlowGame, 1000);
     // display the first question+answers
     showQandA();
     // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, 30*1000);
+    loopQandA = setInterval(showNext, timeAllowed*1000);
 });
 
 // if the player answers
 $(".answers").on("click", function() {
     // stop the main flow of the game and timer
-    clearInterval(timer);
+    clearInterval(mainFlow);
     // stop the display of question+answers
     clearInterval(loopQandA);
     
@@ -217,12 +219,12 @@ $(".answers").on("click", function() {
         sayCongrats();
         // and if all the questions haven't been displayed
         if (count < triviaData.length) {
-            // restart the the game after 3 seconds
-            setTimeout(restart, 3*1000);
+            // restart the the game after 4 seconds
+            setTimeout(restart, 4*1000);
         // if it is the last question    
         } else {
-            // display the results and propose to start over after 3 seconds
-            setTimeout(showResult, 3*1000);
+            // display the results and propose to start over after 4 seconds
+            setTimeout(showResult, 4*1000);
         };
 
     // if the answer is incorrect
@@ -234,12 +236,12 @@ $(".answers").on("click", function() {
         sayWrong();
         // and if all the questions haven't been displayed
         if (count < triviaData.length) { 
-            // restart the game after 3 seconds
-            setTimeout(restart, 3*1000);
+            // restart the game after 4 seconds
+            setTimeout(restart, 4*1000);
         // if it is the last question    
         } else {
-            // display the results and propose to start over after 3 seconds
-            setTimeout(showResult, 3*1000);
+            // display the results and propose to start over after 4 seconds
+            setTimeout(showResult, 4*1000);
         };
     };
 
@@ -255,15 +257,15 @@ $("#start-over").on("click", function() {
     incorrect = 0;
     unanswered = 0;
     // reset the timeAllowed
-    timeAllowed = 30;
+    timeAllowed = 15;
     // display the timer
-    $("#timer").text("Timer: 30");
+    $("#timer").text("Timer: " + timeAllowed);
     // launch the mainFlowGame() function  to sart the game over - start the timer
-    timer = setInterval(mainFlowGame, 1000);
+    mainFlow = setInterval(mainFlowGame, 1000);
     // display the first question+answers
     showQandA();
     // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, 30*1000);
+    loopQandA = setInterval(showNext, timeAllowed*1000);
 });
 
 
