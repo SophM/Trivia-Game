@@ -20,6 +20,6 @@
 
 7. If the answer is correct, we display a "congrats" message with a little pic/gif/something and then goes on automatically to display the next question..
 
-8. If the answer is incorrect, we display a "you're wrong" message with a little pic/gif/something and then goes on automatically to display the next question..
+8. If the answer is incorrect, we display a "you're wrong" message with a little pic/gif/something and then goes on automatically to display the next question.
 
 9. When all the questions have been asked, we get the "final" screen that displays a little message saying the game is over, the number of correct answers, the number of incorrect answers, the number of unanswered questions and a button to start over. 
