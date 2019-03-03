@@ -34,10 +34,6 @@ var timeAllowed = 15;
 // variable to store the main flow of the game
 var mainFlow;
 
-// variable to store the setInterval function to 
-// display automatically the question+answers
-var loopQandA;
-
 
 // ==================================
 // Functions
@@ -52,8 +48,6 @@ function mainFlowGame() {
     if (timeAllowed === 0 && count < triviaData.length) {
         // stop the main flow of the game and timer
         clearInterval(mainFlow);
-        // stop the display of question+answers
-        clearInterval(loopQandA);
         // increase by 1 the unanswered count
         unanswered++;
         console.log("unanswered: " + unanswered);
@@ -61,19 +55,17 @@ function mainFlowGame() {
         sayTimeIsUp();
         // restart the game after 4 seconds
         setTimeout(restart, 4*1000);
-    // otherwise if all the question has been displayed
+    // otherwise if all the questions have been displayed
     } else if (timeAllowed === 0 && count === triviaData.length) {
         // stop the main flow of the game and timer
         clearInterval(mainFlow);
-        // stop the display of question+answers
-        clearInterval(loopQandA);
         // increase by 1 the unanswered count - for the last question
         unanswered++;
         console.log("unanswered: " + unanswered);
         // display the results and propose to start over
         showResult();    
-    };
-};
+    }
+}
 
 // function to display the questions and the corresponding possible answers
 function showQandA() {
@@ -96,20 +88,15 @@ function showQandA() {
     $("#answer3").attr("value", triviaData[count].a3);
     $("#answer4").text(triviaData[count].a4);
     $("#answer4").attr("value", triviaData[count].a4);
-    // hide the empty asnwer button
+    // hide the empty answer buttons
     if ((triviaData[count].a3 === undefined) || (triviaData[count].a4 === undefined)) {
         $("#answer3").hide();
         $("#answer4").hide();
-    };
+    }
     // increase the count of questions asked by 1
     count++;
     console.log("count: " + count);
-};
-
-// function to display the next question+answers and allow the the timer to goes down till zero
-function showNext() {
-    setTimeout(showQandA, 1000);
-};
+}
 
 // function to display "time is up" message + gif if time runs out before player answers
 function sayTimeIsUp() {
@@ -123,7 +110,7 @@ function sayTimeIsUp() {
     $("#question-message").text("Time is up!");
     $("#reveal-answer").text("The correct answer is: " + correctAnswers[count-1]);
     $("#pic-gif").attr("src", gifs[count-1]);
-};
+}
 
 // function to display "congrats" message + gif if correct answer
 function sayCongrats() {
@@ -136,7 +123,7 @@ function sayCongrats() {
     // fill up the HTML elements of interest
     $("#question-message").text("Congrats, you got it!");
     $("#pic-gif").attr("src", gifs[count-1]);
-};
+}
 
 // function to display "you're wrong" message + gif if incorrect answer
 function sayWrong() {
@@ -150,7 +137,7 @@ function sayWrong() {
     $("#question-message").text("Sorry, you're wrong!");
     $("#reveal-answer").text("The correct answer is: " + correctAnswers[count-1]);
     $("#pic-gif").attr("src", gifs[count-1]);
-};
+}
 
 // function to restart the game after the player answered or time ran out
 function restart() {
@@ -160,9 +147,7 @@ function restart() {
     mainFlow = setInterval(mainFlowGame, 1000);
     // display the next question+answers
     showQandA();
-    // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, timeAllowed*1000);
-};
+}
 
 // function to display results at the end of the game
 function showResult() {
@@ -181,7 +166,7 @@ function showResult() {
      $("#score").append("<h4>Unanswered: " + unanswered + "</h4><br><br>");
      // display option to start over
      $("#start-over").attr("style", "display:block");
-};
+}
 
 
 // ==================================
@@ -201,16 +186,12 @@ $("#start").on("click", function() {
     mainFlow = setInterval(mainFlowGame, 1000);
     // display the first question+answers
     showQandA();
-    // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, timeAllowed*1000);
 });
 
 // if the player answers
 $(".answers").on("click", function() {
     // stop the main flow of the game and timer
     clearInterval(mainFlow);
-    // stop the display of question+answers
-    clearInterval(loopQandA);
     
     //store the answer corresponding to the button that has been clicked in the variable "answer"
     var answer = $(this).val();
@@ -230,7 +211,7 @@ $(".answers").on("click", function() {
         } else {
             // display the results and propose to start over after 4 seconds
             setTimeout(showResult, 4*1000);
-        };
+        }
 
     // if the answer is incorrect
     } else if (answer !== correctAnswers[count-1]) {
@@ -247,8 +228,8 @@ $(".answers").on("click", function() {
         } else {
             // display the results and propose to start over after 4 seconds
             setTimeout(showResult, 4*1000);
-        };
-    };
+        }
+    }
 
 });
 
@@ -269,8 +250,6 @@ $("#start-over").on("click", function() {
     mainFlow = setInterval(mainFlowGame, 1000);
     // display the first question+answers
     showQandA();
-    // display the other questions+answers automatically when the timer reaches 0
-    loopQandA = setInterval(showNext, timeAllowed*1000);
 });
 
 
