@@ -14,7 +14,7 @@ When there is no more question to answer, a summary of the results - number of c
 
 To build this game, I used the following technologies:
 - HTML
-- javascript/jQuery
+- JavaScript/jQuery
 - CSS
 - Bootstrap
 
