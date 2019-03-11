@@ -26,13 +26,13 @@ To build this game, I used the following technologies:
 
 ### Screenshot of the game at the beginning
 
-![Screenshot of the game at the beginning](https://github.com/SophM/Trivia-Game/blob/master/assets/screenshots_for_readme/screenshot-game-beginning.png?raw=true)
+![Screenshot of the game at the beginning](https://github.com/SophM/Trivia-Game/blob/master/assets/screenshots_gif_for_readme/screenshot-game-beginning.png?raw=true)
 
 ---
 
 ### Screenshot of the game  - question displayed
 
-![Screenshot of the game  - question displayed](https://github.com/SophM/Trivia-Game/blob/master/assets/screenshots_for_readme/screenshot-question-going.png?raw=true)
+![Screenshot of the game  - question displayed](https://github.com/SophM/Trivia-Game/blob/master/assets/screenshots_gif_for_readme/screenshot-question-going.png?raw=true)
 
 ---
 
