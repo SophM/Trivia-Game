@@ -40,3 +40,9 @@ To build this game, I used the following technologies:
 
 ![GIF to show the responsive layout](https://github.com/SophM/Trivia-Game/blob/master/assets/screenshots_gif_for_readme/gif-responsive-layout.gif?raw=true)
 
+--- 
+
+### Contribution
+
+- Sophie Mallez
+
